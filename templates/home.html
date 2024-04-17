@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block div %}
+<div class="row">
+    <div class="col-md-6">
+        <h3>카테고리</h3>
+        <ul class="list-group">
+            {% for cat in category %}
+            <li class="list-group-item">{{ cat.name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="col-md-6">
+        <h3>음식</h3>
+        <div class="row">
+            {% for f in food %}
+            <div class="col-sm-6 col-md-4 mb-4">
+                <div class="card">
+                    <a href="{% url 'Chinese:index_detail' pk=f.id %}">
+                        <img src="{{ f.image_url }}" class="card-img-top food-image" alt="{{ f.name }}">
+                        <div class="card-body row">
+                            <h5 class="card-title">{{ f.name }}</h5>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
