@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Bookmark App{% endblock %}
+
+{% block content %}
+
+<h3>Bookmark List</h3>
+<br>
+<ul class="list-group ">
+    {% for bookmark in object_list %}
+    <li class="list-group-item"><a href="{% url 'bookmark:detail' bookmark.id %}">{{ bookmark.title }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}
