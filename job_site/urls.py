@@ -20,13 +20,22 @@ from django.conf.urls.static import static
 from django.conf import settings
 from . import views
 
+
 app_name= 'job_site'
 
 urlpatterns = [
 
     path('', views.index, name='index'),
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name='admin'),
     path('person/', include('person.urls')),
     path('chinese/', include('Chinese.urls')),
     path('customer/', include('customer.urls')),
+    path('blog/', include('blog.urls')),
+    path('bookmark/', include('bookmark.urls')),
+    path('photo/', include('photo.urls')),
+    # ------------------------------
+    path('accounts/', include('django.contrib.auth.urls')), 
+    path('accounts/register/', views.UserCreateView.as_view(), name='register'),
+    path('accounts/register/done/',views.UserCreateDoneTV.as_view(), name='register_done'),
+    # path('logout/', auth_views.LoginView.as_view(next_page='home'), name='logout'), # 추가
 ]+static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

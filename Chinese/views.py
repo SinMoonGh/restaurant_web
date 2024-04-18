@@ -7,6 +7,7 @@ from .forms import NameForm
 from django.http import HttpResponseRedirect
 from django.core.mail import send_mail
 from django.core.files.uploadedfile import SimpleUploadedFile
+from django.contrib.auth.decorators import login_required
 # from .forms import ContactFormWithMugshot
 # views.py
 
@@ -14,6 +15,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 # views.py
 
 # Create your views here.
+# @login_required
 def index(request):
     form = None
     # context = {'name': 'Alice'}  # 템플릿에 전달할 context 데이터
@@ -47,7 +49,7 @@ def index(request):
         form = FoodForm()
     return render(request, 'Chinese/index.html', {'form' : form})
     
-
+# @login_required
 def index_detail(request, pk):
     object = Food.objects.get(pk=pk)
     context = {
@@ -55,7 +57,7 @@ def index_detail(request, pk):
     }
     return render(request, 'Chinese/index_detail.html', context)
 
-
+# @login_required
 def index_delete(request, pk):
     object = Food.objects.get(pk=pk)
     object.delete()

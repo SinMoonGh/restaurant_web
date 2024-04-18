@@ -1,12 +1,15 @@
+from typing import Any
 from django.db import models
 from Chinese.models import Category, Food
+from django.contrib.auth.models import User, UserManager, AbstractUser
+from django.contrib.auth.models import Permission
+from django.utils.translation import gettext as _
+
 
 
 # Create your models here.
-class User(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True)
-    user_name = models.CharField(verbose_name='이름', max_length=20)
-    user_phone = models.CharField(verbose_name='전화번호', max_length=20)
+
+
 
 
 class Cart(models.Model):

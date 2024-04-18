@@ -17,10 +17,10 @@ class Food(models.Model):
     image = models.ImageField(upload_to=get_image_path)
 
 
-class User(models.Manager):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, default='')
-    user_name = models.CharField(verbose_name='이름', max_length=20)
-    user_phone = models.CharField(verbose_name='전화번호', max_length=20)
+# class User(models.Manager):
+#     category = models.ForeignKey(Category, on_delete=models.CASCADE, default='')
+#     user_name = models.CharField(verbose_name='이름', max_length=20)
+#     user_phone = models.CharField(verbose_name='전화번호', max_length=20)
 
 
 

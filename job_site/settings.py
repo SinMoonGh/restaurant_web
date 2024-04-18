@@ -41,6 +41,14 @@ INSTALLED_APPS = [
     'person.apps.PersonConfig',
     'Chinese.apps.ChineseConfig',
     'customer.apps.CustomerConfig',
+    # "django.contrib.auth.backends.ModelBackend",
+    #merge
+    'bookmark.apps.BookmarkConfig',
+    'blog.apps.BlogConfig',
+    'taggit.apps.TaggitAppConfig',
+    'taggit_templatetags2',
+    'photo.apps.PhotoConfig',
+    'widget_tweaks',    
 ]
 
 MIDDLEWARE = [
@@ -89,18 +97,18 @@ DATABASES = {
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    # },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    # },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    # },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    # },
 ]
 
 
@@ -119,10 +127,21 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+REQUIRED_FIELDS='customer.User'
 
+STATIC_URL = 'static/'
+STATICFILES_DIRS = [BASE_DIR/'static']
+
+import os
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR/'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # BASE_DIR/'media'
+
+TAGGIT_CASE_INSENSITIVE=True
+TAGGIT_LIMIT=50
+
+# LOGIN_REDIRECT_URL='/'
+# LOGIN_URL
+# LOGOUT_REDIRECT_URL='/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

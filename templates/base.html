@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}중화요리집{% endblock %}</title>
+    <title>{% block title %}ds{% endblock %}</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -18,29 +18,127 @@
         }
     </style>
     {% block style %}{% endblock %}
+    {% block head %}{% endblock %}
 </head>
 
 <body>
-    <div class="container mt-5">
-        <h1 class="mb-3 text-center">우리 중화요리집에 오신 것을 환영합니다.</h1>
-
-        <div class="d-flex justify-content-end mb-3">
-            <a href="{% url 'index' %}" class="btn btn-primary">Home</a>
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">                
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        {% if user.is_active %}
+                        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarUserDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user-circle"></i>&nbsp;{% firstof user.get_short_name user.get_username %}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarUserDropdown">
+                            <form action="{% url 'logout' %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="dropdown-item">Logout</button>
+                            </form>
+                            <li><a class="dropdown-item" href="{% url 'password_change' %}">Change Password</a></li>
+                        </ul>
+                        {% else %}
+                        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarAnonymousDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user-circle"></i>&nbsp;Anonymous
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarAnonymousDropdown">
+                            <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
+                            <li><a class="dropdown-item" href="{% url 'register' %}">Register</a></li>
+                        </ul>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
         </div>
+    </nav> -->
 
-        <div class="d-flex justify-content-end mb-3">
-            <a href="{% url 'Chinese:index' %}" class="btn btn-primary">제품 등록</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'index' %}">ㄳㄳ</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'index' %}">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'customer:index' %}">중국집</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'blog:index' %}">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'bookmark:index' %}">Bookmark</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'photo:index' %}">Photo</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                        aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="admin/">admin</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="nav-link" href="{% url 'Chinese:index' %}">나도 등록할테야</a>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link disabled">Disabled</a>
+                </li>
+            </ul>
+
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            <ul class="navbar-nav ms-auto">
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                        aria-expanded="false">
+                        로그인
+                    </a>
+                    <div class="dropdown-menu">
+
+                        <a class="dropdown-item" href="{% url 'login' %}">login</a>
+                        <a class="dropdown-item" href="{% url 'logout' %}">logout</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+
+                    </div>
+                </li>
+
+            </ul>
         </div>
+    </nav>
 
-        <div class="d-flex justify-content-end mb-3">
-            <a href="{% url 'customer:index' %}" class="btn btn-primary">고객 페이지로 이동</a>
+
+
+    <div class="container mb-5">
+        {% block content %}{% endblock %}
+    </div>
+
+    {% block footer %}
+    <footer class="footer mt-auto py-3 bg-light fixed-bottom">
+        <div class="container text-center">
+            <p>© 2024 재밌는 장고 공부. 모든 권리 보유.</p>
+            <p>Follow us: <a href="#">Facebook</a> | <a href="#">Twitter</a> | <a href="#">Instagram</a></p>
+            <p>개인정보처리방침 | 이용약관</p>
         </div>
+    </footer>
+    {% endblock %}
 
-        <div class="d-flex justify-content-end mb-3">
-            <a href="{% url 'customer:MRCreate' %}" class="btn btn-primary">회원 가입</a>
-        </div>
-
-        {% block div %}{% endblock %}
+    {% block div %}{% endblock %}
     </div>
     {% block body %}{% endblock %}
 
